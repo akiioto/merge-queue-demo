@@ -7,7 +7,7 @@ on:
 
 jobs:
   run-workflows:
-    runs-on: [ self-hosted, solinas ]
+    runs-on: ubuntu-latest
     outputs:
       files: ${{ steps.pathFilters.outputs.changes }}
     steps:
