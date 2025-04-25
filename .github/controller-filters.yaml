@@ -1,0 +1,11 @@
+dockerFileChanges:
+  - '.github/workflows/validate-dockerfiles.yml'
+  - '**/Dockerfile'
+unitTestsFileChanges:
+  - '.github/workflows/unit-test-go.yml'
+  -  '**/*.go'
+buildImageFileChanges:
+  - '**/*.go'
+  - '**/Dockerfile'
+  - 'go.mod'
+  - 'go.sum'
