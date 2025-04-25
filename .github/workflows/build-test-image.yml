@@ -1,0 +1,26 @@
+name: build-test-image
+
+on:
+  workflow_call:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+    paths:
+      - "**/*.go"
+      - "**/Dockerfile"
+      - ".github/workflows/build-test-image.yml"
+      - "go.mod"
+      - "go.sum"
+
+permissions:
+  id-token: write # This is required for requesting the JWT token
+  contents: read # This is required for actions/checkout
+
+jobs:
+  build-scanner-image:
+    uses: kyma/oci-image-builder/.github/workflows/image-builder.yml@main
+    with:
+      name: testrunner
+      dockerfile: cmd/test/Dockerfile
+      context: .

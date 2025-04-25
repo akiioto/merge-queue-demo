@@ -1,0 +1,26 @@
+name: validate-dockerfiles
+
+on:
+  workflow_call:
+
+jobs:
+  hadolint:
+    runs-on: [self-hosted, solinas]
+    steps:
+      - name: Checkout PR merge commit
+        id: checkout_pr_merge_commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ github.event_name == 'pull_request_target' }}
+      - name: Checkout target branch
+        id: checkout_target_branch
+        uses: actions/checkout@v4
+        if: ${{ github.event_name == 'merge_group' }}
+      - name: Lint Dockerfiles
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: "Dockerfile"
+          recursive: true
