@@ -5,7 +5,7 @@ on:
 
 jobs:
   unittest:
-    runs-on: [self-hosted, solinas]
+    runs-on: ubuntu-latest
     env:
       GOPRIVATE: github.tools.sap
     steps:
